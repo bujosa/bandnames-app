@@ -34,7 +34,7 @@ class BandList {
         });
     }
 
-    changeBandName(id, newName) {
+    changeName(id, newName) {
         this.bands = this.bands.map(band => {
             if (band.id === id) {
                 band.name = newName;
