@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { BandAdd } from '../components/BandAdd';
+import { BandChart } from '../components/BandChart';
 import { BandList } from '../components/BandList';
 import { SocketContext } from '../context/SocketContext';
 
@@ -21,6 +22,12 @@ function HomePage() {
 
 			<h1>BandNames</h1>
 			<hr />
+
+			<div className='row'>
+				<div className='col'>
+					<BandChart></BandChart>
+				</div>
+			</div>
 
 			<div className='row'>
 				<div className='col-8'>
