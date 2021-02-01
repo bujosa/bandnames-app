@@ -7,39 +7,36 @@ const cors = require('cors');
 const Sockets = require('./sockets');
 
 class Server {
+	constructor() {
+		this.app = express();
+		this.port = process.env.PORT;
 
-    constructor() {
+		this.server = http.createServer(this.app);
 
-        this.app = express();
-        this.port = process.env.PORT;
+		this.io = socketio(this.server, {
+			/* Configurations */
+		});
+	}
 
-        this.server = http.createServer(this.app);
+	middlewares() {
+		this.app.use(express.static(path.resolve(__dirname, '../public')));
 
-        this.io = socketio(this.server, { /* Configurations */ });
-    }
+		// this.app.use(cors());
+	}
 
-    middlewares() {
-        this.app.use(express.static(path.resolve(__dirname, '../public')));
+	configurarSockets() {
+		new Sockets(this.io);
+	}
 
-        this.app.use(cors());
-    }
+	execute() {
+		this.middlewares();
 
-    configurarSockets() {
-        new Sockets(this.io);
-    }
+		this.configurarSockets();
 
-    execute() {
-
-        this.middlewares();
-
-        this.configurarSockets();
-
-        this.server.listen(this.port, () => {
-            console.log('Server corriendo en puerto:', this.port);
-        });
-    }
-
+		this.server.listen(this.port, () => {
+			console.log('Server corriendo en puerto:', this.port);
+		});
+	}
 }
-
 
 module.exports = Server;
