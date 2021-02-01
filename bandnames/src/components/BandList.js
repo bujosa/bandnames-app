@@ -42,8 +42,7 @@ export const BandList = () => {
 			<tr key={band.id}>
 				<td>
 					<button className='btn btn-primary' onClick={() => vote(band.id)}>
-						{' '}
-						+1{' '}
+						+1
 					</button>
 				</td>
 				<td>
@@ -55,8 +54,7 @@ export const BandList = () => {
 					/>
 				</td>
 				<td>
-					{' '}
-					<h3> {band.votes} </h3>{' '}
+					<h3> {band.votes} </h3>
 				</td>
 				<td>
 					<button className='btn btn-danger' onClick={() => toDelete(band.id)}>
