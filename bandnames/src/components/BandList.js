@@ -9,7 +9,7 @@ export const BandList = () => {
 		socket.on('current-bands', (bands) => {
 			setBands(bands);
 		});
-		return socket.off('current-bands');
+		return () => socket.off('current-bands');
 	}, [socket]);
 
 	const changedName = (event, id) => {
