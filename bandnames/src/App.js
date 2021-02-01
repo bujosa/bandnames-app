@@ -27,10 +27,6 @@ function App() {
 		socket.emit('change-name-band', { id, name });
 	};
 
-	const addBand = (name) => {
-		socket.emit('add-band', name);
-	};
-
 	return (
 		<div className='container'>
 			<div className='alert'>
@@ -57,7 +53,7 @@ function App() {
 					></BandList>
 				</div>
 				<div className='col-4'>
-					<BandAdd addBand={addBand}></BandAdd>
+					<BandAdd></BandAdd>
 				</div>
 			</div>
 		</div>
