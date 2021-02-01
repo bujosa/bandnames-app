@@ -4,7 +4,7 @@ import { BandAdd } from './components/BandAdd';
 import { BandList } from './components/BandList';
 
 const connectSocketServer = () => {
-	const socket = io.connect(' http://localhost:8080/');
+	const socket = io.connect('http://localhost:8080/');
 	return socket;
 };
 
