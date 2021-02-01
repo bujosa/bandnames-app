@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
-export const BandList = ({ data, votar, borrar, cambiarNombre }) => {
+export const BandList = ({ data, vote, toDelete, changeName }) => {
 	const [bands, setBands] = useState(data);
 
 	useEffect(() => {
 		setBands(data);
 	}, [data]);
 
-	const cambioNombre = (event, id) => {
-		const nuevoNombre = event.target.value;
+	const changedName = (event, id) => {
+		const newName = event.target.value;
 
 		setBands((bands) =>
 			bands.map((band) => {
 				if (band.id === id) {
-					band.name = nuevoNombre;
+					band.name = newName;
 				}
 				return band;
 			})
@@ -21,17 +21,14 @@ export const BandList = ({ data, votar, borrar, cambiarNombre }) => {
 	};
 
 	const onPerdioFoco = (id, nombre) => {
-		console.log(id, nombre);
-
-		// TODO: Disparar el evento de sockets
-		cambiarNombre(id, nombre);
+		changeName(id, nombre);
 	};
 
-	const crearRows = () => {
+	const createRows = () => {
 		return bands.map((band) => (
 			<tr key={band.id}>
 				<td>
-					<button className='btn btn-primary' onClick={() => votar(band.id)}>
+					<button className='btn btn-primary' onClick={() => vote(band.id)}>
 						{' '}
 						+1{' '}
 					</button>
@@ -40,7 +37,7 @@ export const BandList = ({ data, votar, borrar, cambiarNombre }) => {
 					<input
 						className='form-control'
 						value={band.name}
-						onChange={(event) => cambioNombre(event, band.id)}
+						onChange={(event) => changedName(event, band.id)}
 						onBlur={() => onPerdioFoco(band.id, band.name)}
 					/>
 				</td>
@@ -49,7 +46,7 @@ export const BandList = ({ data, votar, borrar, cambiarNombre }) => {
 					<h3> {band.votes} </h3>{' '}
 				</td>
 				<td>
-					<button className='btn btn-danger' onClick={() => borrar(band.id)}>
+					<button className='btn btn-danger' onClick={() => toDelete(band.id)}>
 						Borrar
 					</button>
 				</td>
@@ -68,7 +65,7 @@ export const BandList = ({ data, votar, borrar, cambiarNombre }) => {
 						<th>Borrar</th>
 					</tr>
 				</thead>
-				<tbody>{crearRows()}</tbody>
+				<tbody>{createRows()}</tbody>
 			</table>
 		</>
 	);
